@@ -1,0 +1,67 @@
+
+@using RealEstateCMS.Models;
+@model Contact
+
+@{
+    ViewData["Title"] = "Contact Page";
+}
+<style>
+    .label {
+        margin-bottom: 0px;
+    }
+    a:hover {
+        text-decoration:none;
+    }
+    body {
+        margin-bottom: 0px !important;
+    }
+
+    footer {
+        background-color: white;
+    }
+
+    .create {
+        color: white;
+        @* background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top; *@
+    }
+
+    .navbar {
+        margin-bottom: 0px !important;
+    }
+
+    .main {
+        padding-bottom: 0px !important;
+    }
+</style>
+<div class="d-flex flex-row create">
+    <div class="d-flex flex-column" style="margin-top:50px;margin-bottom:50px;margin-left:10%; width:30%">
+        <h1>Contact Us</h1>
+        <form asp-controller="User" asp-action="EditUser" method="post">
+            <div class="row">
+                <div class="col form-group">
+                    <label asp-for="Name" class="">Your name</label>
+                    <input asp-for="Name" id="name" class="form-control">
+                    <span class="text-danger" asp-validation-for="Name"></span>
+                </div>
+                <div class="col form-group">
+                    <label asp-for="Email" class="">Your email</label>
+                    <input asp-for="Email" id="email" class="form-control">
+                    <span class="text-danger" asp-validation-for="Email"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Subject" class="">Subject</label>
+                <input asp-for="Subject" id="subject" class="form-control">
+                <span class="text-danger" asp-validation-for="Subject"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Message">Your message</label>
+                <textarea asp-for="Message" id="Message" rows="2" class="form-control md-textarea"></textarea>
+                <span class="text-danger" asp-validation-for="Message"></span>
+            </div>
+            
+            <input class="btn btn-success" type="submit" value="SEND">
+        </form>
+    </div>

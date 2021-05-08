@@ -1,0 +1,108 @@
+﻿@using RealEstateCMS.Models;
+@model RegisterModel
+<style>
+    .label {
+        margin-bottom: 0px;
+    }
+    a:hover {
+        text-decoration:none;
+    }
+    body {
+        margin-bottom: 0px !important;
+    }
+
+    footer {
+        background-color: white;
+    }
+
+    .create {
+        @* background-image: url(https://1.bp.blogspot.com/-Y_HN8gpwM60/XjVcHhKSrzI/AAAAAAAABh8/x_bI21rIoJMcN9jCiHadfLKaP0rIj2kTACPcBGAYYCw/s1920/Dark-Black-Paper-Background.jpg); *@
+        color: white;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top;
+    }
+
+    .navbar {
+        margin-bottom: 0px !important;
+    }
+
+    .main {
+        padding-bottom: 0px !important;
+    }
+</style>
+<div class="d-flex flex-row create">
+    <div class="d-flex flex-column" style="margin-top:50px;margin-bottom:50px;margin-left:10%; width:30%">
+        <h1>Account Info</h1>
+        <form asp-controller="User" asp-action="EditUser" method="post">
+            <div class="row">
+                <div class="col form-group">
+                    <label asp-for="FirstName"></label>
+                    <input class="form-control" asp-for="FirstName" value="@ViewBag.ActiveUser.FirstName">
+                    <span class="text-danger" asp-validation-for="FirstName"></span>
+                </div>
+                <div class="col form-group">
+                    <label asp-for="LastName"></label>
+                    <input class="form-control" asp-for="LastName" value="@ViewBag.ActiveUser.LastName">
+                    <span class="text-danger" asp-validation-for="LastName"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input class="form-control" asp-for="Email" value="@ViewBag.ActiveUser.Email">
+                <span class="text-danger" asp-validation-for="Email"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address"></label>
+                <input class="form-control" asp-for="Address" value="@ViewBag.ActiveUser.Address">
+                <span class="text-danger" asp-validation-for="Address"></span>
+            </div>
+            <div class="row">
+                <div class="col-9 form-group">
+                    <label asp-for="City"></label>
+                    <input class="form-control" asp-for="City" value="@ViewBag.ActiveUser.City">
+                    <span class="text-danger" asp-validation-for="City"></span>
+                </div>
+                <div class="col form-group">
+                    <label asp-for="State"></label>
+                    <select class="form-control" asp-for="State">
+                        @foreach (var state in @ViewBag.State) {
+                            if (state.Code == @ViewBag.ActiveUser.State.Code) {
+                                <option class="form-control" value="@state.ID" selected>@state.Code</option>
+                            } else {
+                                <option class="form-control" value="@state.ID">@state.Code</option>
+                            }
+                        }
+                    </select>
+                    <span class="text-danger" asp-validation-for="State"></span>
+                </div>
+            </div>
+            <input class="btn btn-success" type="submit" value="UPDATE">
+        </form>
+    </div>
+    <div class="d-flex flex-column" style="margin-top:50px;margin-bottom:50px;margin-left:10%; width:40%">
+        <h1>Port Orders</h1>
+        @foreach (var item in ViewBag.Order) {
+            <div class="d-flex flex-column">
+                <div class="d-flex flex-row justify-content-between">
+                    <div>
+                        <p>@item.CreatedAt.ToShortDateString()</p>
+                    </div>
+                    <div>
+                        <label class="mb-0 mr-1">Favorite</label>
+                        @if (item.Favorite == true) {
+                            <a class="text-success" style="font-size:20px;" asp-controller="User" asp-action="Favorite" asp-route-id="@item.ID">&#10062;</a>
+                        } else {
+                            <a class="text-white" style="font-size:23px;" asp-controller="User" asp-action="Favorite" asp-route-id="@item.ID">&#11036;</a>
+                        }
+
+                    </div>
+                </div>
+                <div>
+                    <p>@item.MenuItem.Name - @item.Size - $@item.Price</p>
+                </div>
+            </div>
+            <hr class="row ml-0 mt-0" style="border-top:1px solid white;" />
+        }
+    </div>
+</div>

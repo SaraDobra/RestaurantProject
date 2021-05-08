@@ -1,0 +1,21 @@
+﻿@using RealEstateCMS.Models;
+@model LoginModel
+
+<div class="d-flex flex-column" style="margin:100px auto; width:30%">
+    <h1>Login</h1>
+    <form asp-controller="User" asp-action="LoginUser" method="post">
+
+        <div class="form-group">
+            <label asp-for="email"></label>
+            <input class="form-control" asp-for="email">
+        </div>
+        <div class="form-group">
+            <label asp-for="password"></label>
+            <input class="form-control" asp-for="password">
+            <span class="text-danger" asp-validation-for="password"></span>
+            <span class="text-danger" asp-validation-for="email"></span>
+        </div>
+
+        <input class="btn btn-success" type="submit" value="Login">&nbsp;<a class="btn btn-info" href="../register">Register</a>
+    </form>
+</div>

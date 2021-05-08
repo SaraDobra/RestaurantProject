@@ -1,0 +1,74 @@
+﻿@model PizzaTime.Models.ReserveModel
+@{
+    ViewData["Title"] = "Reserve";
+}
+<style>
+    body {
+        margin-bottom: 0px !important;
+    }
+
+    footer {
+        background-color: white;
+    }
+
+    .pizza {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .create {
+        background-image: url(https://cdn.pixabay.com/photo/2020/03/21/02/26/pizza-4952508_960_720.jpg);
+        color: white;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top;
+    }
+
+    .navbar {
+        margin-bottom: 0px !important;
+    }
+
+    .main {
+        padding-bottom: 0px !important;
+    }
+</style>
+<div class="row create" style="margin-left:0px; margin-right:0px;">
+    <div class="col-md-4" style="margin:50px 0 50px 10%">
+        <h1 class="text-center mb-5">RESERVE-A-TABLE</h1>
+        <form asp-action="ReserveTable" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TableID" class="control-label"></label>
+                <select class="form-control" asp-for="TableID">
+                    <option class="form-control" value="0">---</option>
+                    @foreach (var item in ViewBag.ListItems) {
+                        <option class="form-control" value="@item.ID">Table : @item.TableNumber , Seats : @item.NumberOfSeats</option>
+                    }
+                </select>
+                <span asp-validation-for="TableID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="RESERVE" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

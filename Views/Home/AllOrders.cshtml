@@ -1,0 +1,67 @@
+﻿@using PizzaTime.Models;
+@model List<OrderListModel>
+
+@{
+    ViewData["Title"] = "Orderss";
+}
+
+<div class="w-75" style="margin:0 auto;">
+    <h1>Orders</h1>
+
+    <p>
+        <a class="btn btn-success" asp-action="Create">ADD TO ORDER</a>
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Method
+                </th>
+                <th>
+                    Size
+                </th>
+                <th>
+                    Crust
+                </th>
+                <th>
+                    Qty
+                </th>
+                <th>
+                    Pizza
+                </th>
+                <th>
+                    Price
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Method)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Size)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Crust)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MenuItem.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        <a class="btn btn-info" asp-action="DetailsID" asp-route-id="@item.ID">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

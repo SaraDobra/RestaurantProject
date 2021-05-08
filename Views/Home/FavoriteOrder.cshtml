@@ -1,0 +1,151 @@
+﻿@model PizzaTime.Models.OrderModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<style>
+    body {
+        margin-bottom: 0px !important;
+    }
+
+    footer {
+        background-color: white;
+    }
+    .pizza {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .create {
+        background-image: url(https://cdn.pixabay.com/photo/2020/03/21/02/26/pizza-4952508_960_720.jpg);
+        color: white;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top;
+    }
+
+    .navbar {
+        margin-bottom: 0px !important;
+    }
+
+    .main {
+        padding-bottom: 0px !important;
+    }
+</style>
+<div class="row create" style="margin-left:0px; margin-right:0px;">
+    <div class="col-md-4" style="margin:50px 0 50px 10%">
+        <h1 class="text-center mb-5">CRAFT-A-PIZZA</h1>
+        <form asp-action="CheckOrder" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Method" class="control-label"></label>
+                <select class="form-control" asp-for="Method">
+                    @if (@ViewBag.FavPizza.Method == "CarryOut") {
+                        <option class="form-control" value="CarryOut" selected>CarryOut</option>
+                        <option class="form-control" value="Delivery">Delivery</option>
+                        <option class="form-control" value="Indoor">Indoor</option>
+                    } else if (@ViewBag.FavPizza.Method == "Delivery") {
+                        <option class="form-control" value="CarryOut">CarryOut</option>
+                        <option class="form-control" value="Delivery" selected>Delivery</option>
+                        <option class="form-control" value="Indoor">Indoor</option>
+                    } else {
+                        <option class="form-control" value="CarryOut" >CarryOut</option>
+                        <option class="form-control" value="Delivery">Delivery</option>
+                        <option class="form-control" value="Indoor" selected>Indoor</option>
+                    }
+                </select>
+                <span asp-validation-for="Method" class="text-danger"></span>
+            </div>
+            <div class="row pl-2">
+                <div class="col-4 form-group px-2">
+                    <label asp-for="Size" class="control-label"></label>
+                    <select class="form-control" asp-for="Size">
+                        @if (@ViewBag.FavPizza.Size == "Small") {
+                            <option class="form-control" value="Small" selected>Small</option>
+                            <option class="form-control" value="Medium">Medium</option>
+                            <option class="form-control" value="Large">Large</option>
+                            <option class="form-control" value="Extra Large">XL</option>
+                        } else if (@ViewBag.FavPizza.Size == "Medium") {
+                            <option class="form-control" value="Small">Small</option>
+                            <option class="form-control" value="Medium" selected>Medium</option>
+                            <option class="form-control" value="Large">Large</option>
+                            <option class="form-control" value="Extra Large">XL</option>
+                        } else if (@ViewBag.FavPizza.Size == "Large") {
+                            <option class="form-control" value="Small">Small</option>
+                            <option class="form-control" value="Medium">Medium</option>
+                            <option class="form-control" value="Large" selected>Large</option>
+                            <option class="form-control" value="Extra Large">XL</option>
+                        } else {
+                            <option class="form-control" value="Small">Small</option>
+                            <option class="form-control" value="Medium">Medium</option>
+                            <option class="form-control" value="Large">Large</option>
+                            <option class="form-control" value="Extra Large" selected>XL</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Size" class="text-danger"></span>
+                </div>
+                <div style="display:none;" class="col form-group px-0">
+                    <label asp-for="Crust" class="control-label"></label>
+                    <select class="form-control" asp-for="Crust">
+                        @if (@ViewBag.FavPizza.Crust == "Thin Crust") {
+                            <option class="form-control" value="Thin Crust" selected>Thin Crust</option>
+                            <option class="form-control" value="Neapolitan Crust">Neapolitan Crust</option>
+                            <option class="form-control" value="Sicilian Style">Sicilian Style</option>
+                            <option class="form-control" value="NY Style">NY Style</option>
+                        } else if (@ViewBag.FavPizza.Crust == "Neapolitan Crust") {
+                            <option class="form-control" value="Thin Crust">Thin Crust</option>
+                            <option class="form-control" value="Neapolitan Crust" selected>Neapolitan Crust</option>
+                            <option class="form-control" value="Sicilian Style">Sicilian Style</option>
+                            <option class="form-control" value="NY Style">NY Style</option>
+                        } else if (@ViewBag.FavPizza.Crust == "Sicilian Style") {
+                            <option class="form-control" value="Thin Crust">Thin Crust</option>
+                            <option class="form-control" value="Neapolitan Crust">Neapolitan Crust</option>
+                            <option class="form-control" value="Sicilian Style" selected>Sicilian Style</option>
+                            <option class="form-control" value="NY Style">NY Style</option>
+                        } else {
+                            <option class="form-control" value="Thin Crust">Thin Crust</option>
+                            <option class="form-control" value="Neapolitan Crust">Neapolitan Crust</option>
+                            <option class="form-control" value="Sicilian Style">Sicilian Style</option>
+                            <option class="form-control" value="NY Style" selected>NY Style</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Crust" class="text-danger"></span>
+                </div>
+                <div class="col-3 form-group">
+                    <label asp-for="Quantity" class="control-label"></label>
+                    <input asp-for="Quantity" min="1" value="1" class="form-control" />
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="MenuItem" class="control-label"></label>
+                <div class="pizza" style="padding:5px; border:3px solid #ced4da;">
+                    @foreach (var pizza in ViewBag.Pizza) {
+                        @if (@pizza.ID == @ViewBag.FavPizza.MenuItemID) {
+                            <div class="form-check" style="width:33%;">
+                                <input style="width:18px; height:18px; margin-top:3px;" class="form-check-input" checked type="radio" asp-for="MenuItem" value="@pizza.ID" />
+                                <label class="form-check-label" for="flexCheckChecked">
+                                    @pizza.Name
+                                </label>
+                            </div>
+                        } else {
+                            <div class="form-check" style="width:33%;">
+                                <input style="width:18px; height:18px; margin-top:3px;" class="form-check-input" type="radio" asp-for="MenuItem" value="@pizza.ID" />
+                                <label class="form-check-label" for="flexCheckChecked">
+                                    @pizza.Name
+                                </label>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ADD TO ORDER" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,83 @@
+﻿@model PizzaTime.Models.OrderModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<style>
+    body {
+        margin-bottom: 0px !important;
+    }
+
+    footer {
+        background-color: white;
+    }
+    .create {
+        @* background-image: url(https://cdn.pixabay.com/photo/2020/03/21/02/26/pizza-4952508_960_720.jpg); *@
+        color: white;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top;
+        padding: 50px 0 50px 10%;
+    }
+
+    .navbar {
+        margin-bottom: 0px !important;
+    }
+
+    .main {
+        padding-bottom: 0px !important;
+    }
+    .row {
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+</style>
+<div class="create">
+    <div>
+        <h1>Your Order</h1>
+        <hr class="row w-50" style="border:1px solid white;" />
+        <div class="row">
+            <p class="col-3">METHOD:</p>
+            <p class="col-3">@ViewBag.Order.Method</p>
+        </div>
+        <div class="row">
+            <p class="col-3">Qty:</p>
+            <p class="col-3">@ViewBag.Order.Quantity</p>
+        </div>
+        <div class="row">
+            <p class="col-3">Size:</p>
+            <p class="col-3">@ViewBag.Order.Size</p>
+        </div>
+        <div class="row">
+            <p class="col-3">Crust:</p>
+            <p class="col-3">@ViewBag.Order.Crust</p>
+        </div>
+        <div class="row">
+            <p class="col-3">Toppings:</p>
+            <p class="col-3">@ViewBag.Pizza.Name</p>
+        </div>
+        <div class="row">
+            <h4 class="col-3">Price:</h4>
+            <h4 class="col-3">$@ViewBag.Price</h4>
+        </div>
+        <hr class="row w-50 ml-0" style="border:1px solid white; border-top:1px solid white;" />
+        <div class="row">
+            <h2 class="col-3">Total:</h2>
+            <h2 class="col-3">$@ViewBag.PriceQty</h2>
+        </div>
+        <form asp-action="Purchase" method="post">
+            <input class="d-none" asp-for="Method" value="@ViewBag.Order.Method" />
+            <input class="d-none" asp-for="Size" value="@ViewBag.Order.Size" />
+            <input class="d-none" asp-for="Crust" value="@ViewBag.Order.Crust" />
+            <input class="d-none" asp-for="Quantity" value="@ViewBag.Order.Quantity" />
+            <input class="d-none" asp-for="MenuItem" value="@ViewBag.Order.MenuItem" />
+            <input class="d-none" asp-for="Price" value="@ViewBag.PriceQty" />
+            <div class="form-group">
+                <input type="submit" value="PURCHASE" class="w-25 btn btn-success" />
+                <a class="w-25 btn btn-danger text-white" asp-action="Create">START OVER</a>
+            </div>
+        </form>
+    </div>
+
+</div>
